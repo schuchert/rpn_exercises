@@ -4,6 +4,7 @@ import ch.obermuhlner.math.big.BigDecimalMath;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+
 import static java.math.MathContext.UNLIMITED;
 
 public class RpnCalculator {
@@ -21,39 +22,63 @@ public class RpnCalculator {
         values.push(value);
     }
 
-    public void add() {
+    public void execute(String operatorName) {
+        switch (operatorName) {
+            case "add":
+                add();
+                break;
+            case "subtract":
+                subtract();
+                break;
+            case "multiply":
+                multiply();
+                break;
+            case "divide":
+                divide();
+                break;
+            case "pow":
+                pow();
+                break;
+            case "factorial":
+                factorial();
+                break;
+            default:
+                throw new IllegalArgumentException(String.format("Operator: '%s' does not exist", operatorName));
+        }
+    }
+
+    private void add() {
         BigDecimal rhs = values.pop();
         BigDecimal lhs = values.pop();
         values.push(lhs.add(rhs));
     }
 
-    public void subtract() {
+    private void subtract() {
         BigDecimal rhs = values.pop();
         BigDecimal lhs = values.pop();
         values.push(lhs.subtract(rhs));
     }
 
-    public void pow() {
+    private void pow() {
         BigDecimal rhs = values.pop();
         BigDecimal lhs = values.pop();
         values.push(BigDecimalMath.pow(lhs, rhs, UNLIMITED));
     }
 
-    public void multiply() {
+    private void multiply() {
         BigDecimal rhs = values.pop();
         BigDecimal lhs = values.pop();
         values.push(lhs.multiply(rhs));
     }
 
-    public void divide() {
+    private void divide() {
         BigDecimal rhs = values.pop();
         BigDecimal lhs = values.pop();
         values.push(lhs.divide(rhs, UNLIMITED));
     }
 
-    public void factorial() {
+    private void factorial() {
         BigDecimal value = values.pop();
         values.push(BigDecimalMath.factorial(value, MathContext.UNLIMITED));
     }
-
 }
