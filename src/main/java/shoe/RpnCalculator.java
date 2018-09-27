@@ -4,19 +4,17 @@ import ch.obermuhlner.math.big.BigDecimalMath;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.Stack;
+import static java.math.MathContext.UNLIMITED;
 
 public class RpnCalculator {
-
-    public static final MathContext UNLIMITED = MathContext.UNLIMITED;
-    private Stack<BigDecimal> values;
+    private RpnStack values;
 
     public RpnCalculator() {
-        values = new Stack<>();
+        values = new RpnStack();
     }
 
     public BigDecimal x() {
-        return peek();
+        return values.peek();
     }
 
     public void enter(BigDecimal value) {
@@ -24,45 +22,38 @@ public class RpnCalculator {
     }
 
     public void add() {
-        BigDecimal rhs = pop();
-        BigDecimal lhs = pop();
+        BigDecimal rhs = values.pop();
+        BigDecimal lhs = values.pop();
         values.push(lhs.add(rhs));
     }
 
     public void subtract() {
-        BigDecimal rhs = pop();
-        BigDecimal lhs = pop();
+        BigDecimal rhs = values.pop();
+        BigDecimal lhs = values.pop();
         values.push(lhs.subtract(rhs));
     }
 
     public void pow() {
-        BigDecimal rhs = pop();
-        BigDecimal lhs = pop();
+        BigDecimal rhs = values.pop();
+        BigDecimal lhs = values.pop();
         values.push(BigDecimalMath.pow(lhs, rhs, UNLIMITED));
     }
 
     public void multiply() {
-        BigDecimal rhs = pop();
-        BigDecimal lhs = pop();
+        BigDecimal rhs = values.pop();
+        BigDecimal lhs = values.pop();
         values.push(lhs.multiply(rhs));
     }
 
     public void divide() {
-        BigDecimal rhs = pop();
-        BigDecimal lhs = pop();
-        values.push(lhs.divide(rhs));
+        BigDecimal rhs = values.pop();
+        BigDecimal lhs = values.pop();
+        values.push(lhs.divide(rhs, UNLIMITED));
     }
 
     public void factorial() {
-        BigDecimal value = pop();
+        BigDecimal value = values.pop();
         values.push(BigDecimalMath.factorial(value, MathContext.UNLIMITED));
     }
 
-    BigDecimal peek() {
-        return values.size() > 0 ? values.peek() : BigDecimal.ZERO;
-    }
-
-    BigDecimal pop() {
-        return values.size() > 0 ? values.pop() : BigDecimal.ZERO;
-    }
 }
