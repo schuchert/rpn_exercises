@@ -1,0 +1,38 @@
+buildscript {
+    ext {
+        JUNIT_VERSION = '5.3.1'
+        JUNIT_PLATFORM_VERSION = '1.2.0'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.junit.platform:junit-platform-gradle-plugin:$rootProject.ext.JUNIT_PLATFORM_VERSION"
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'ch.obermuhlner', name: 'big-math', version: '2.0.1'
+
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter-api:$rootProject.ext.JUNIT_VERSION"
+    )
+    testRuntime(
+            "org.junit.jupiter:junit-jupiter-engine:$rootProject.ext.JUNIT_VERSION",
+            "org.junit.vintage:junit-vintage-engine:$rootProject.ext.JUNIT_VERSION",
+            "org.junit.platform:junit-platform-launcher:$rootProject.ext.JUNIT_PLATFORM_VERSION",
+            "org.junit.platform:junit-platform-runner:$rootProject.ext.JUNIT_PLATFORM_VERSION"
+    )
+}
+
+test {
+    useJUnitPlatform()
+}
