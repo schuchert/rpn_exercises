@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class RpnCalculatorTest {
+class RpnCalculatorTest {
 
     private RpnCalculator calculator;
 
@@ -26,7 +26,7 @@ public class RpnCalculatorTest {
     void addingTwoNumers() {
         calculator.enter(BigDecimal.valueOf(4));
         calculator.enter(BigDecimal.valueOf(4));
-        calculator.add();
+        calculator.execute("add");
         assertEquals(BigDecimal.valueOf(8), calculator.x());
     }
 
@@ -34,7 +34,7 @@ public class RpnCalculatorTest {
     void subtractingTwoNumers() {
         calculator.enter(BigDecimal.valueOf(2));
         calculator.enter(BigDecimal.valueOf(4));
-        calculator.subtract();
+        calculator.execute("subtract");
         assertEquals(BigDecimal.valueOf(-2), calculator.x());
     }
 
@@ -43,8 +43,8 @@ public class RpnCalculatorTest {
         calculator.enter(BigDecimal.valueOf(11));
         calculator.enter(BigDecimal.valueOf(2));
         calculator.enter(BigDecimal.valueOf(4));
-        calculator.add();
-        calculator.subtract();
+        calculator.execute("add");
+        calculator.execute("subtract");
         assertEquals(BigDecimal.valueOf(5), calculator.x());
     }
 
@@ -52,7 +52,7 @@ public class RpnCalculatorTest {
     void multiplyingTwoNumbers() {
         calculator.enter(BigDecimal.valueOf(2));
         calculator.enter(BigDecimal.valueOf(4));
-        calculator.multiply();
+        calculator.execute("multiply");
         assertEquals(BigDecimal.valueOf(8), calculator.x());
     }
 
@@ -60,7 +60,7 @@ public class RpnCalculatorTest {
     void divideTwoNumbers() {
         calculator.enter(BigDecimal.valueOf(2));
         calculator.enter(BigDecimal.valueOf(4));
-        calculator.divide();
+        calculator.execute("divide");
         assertEquals(BigDecimal.valueOf(.5), calculator.x());
     }
 
@@ -68,32 +68,38 @@ public class RpnCalculatorTest {
     void pow() {
         calculator.enter(BigDecimal.valueOf(4));
         calculator.enter(BigDecimal.valueOf(3));
-        calculator.pow();
+        calculator.execute("pow");
         assertEquals(BigDecimal.valueOf(64), calculator.x());
     }
 
     @Test
     void factorial() {
         calculator.enter(BigDecimal.valueOf(4));
-        calculator.factorial();
+        calculator.execute("factorial");
         assertEquals(BigDecimal.valueOf(24), calculator.x());
     }
 
     @Test
     void addingWithNoNumbersEnteredIs0() {
-        calculator.add();
+        calculator.execute("add");
         assertEquals(BigDecimal.ZERO, calculator.x());
     }
 
     @Test
     void subtractionWithOneValueNegatesValue() {
         calculator.enter(BigDecimal.valueOf(4));
-        calculator.subtract();
+        calculator.execute("subtract");
         assertEquals(BigDecimal.valueOf(-4), calculator.x());
     }
 
     @Test
-    public void divideByZeroWhenCalculatorEmpty() {
-        assertThrows(ArithmeticException.class, calculator::divide);
+    void divideByZeroWhenCalculatorEmpty() {
+        assertThrows(ArithmeticException.class, () -> calculator.execute("divide"));
+    }
+
+    @Test
+    void invalidOperatorThrowsException() {
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> calculator.execute("==bogus=="));
+        assertEquals("Operator: '==bogus==' does not exist", e.getMessage());
     }
 }
