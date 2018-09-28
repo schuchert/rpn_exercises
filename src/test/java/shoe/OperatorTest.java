@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class OperatorTest {
 
     private RpnStack stack;
-    private RpnCalculator calculator;
+    private OperatorFactory factory;
 
     private static Stream<Arguments> testValues() {
         return Stream.of(
@@ -35,13 +35,13 @@ class OperatorTest {
     @BeforeEach
     void init() {
         stack = new RpnStack();
-        calculator = new RpnCalculator();
+        factory = new OperatorFactory();
     }
 
     @ParameterizedTest
     @MethodSource("testValues")
     void validateResultAndRegistration(String operatorName, List<Integer> values, int expected) {
-        Operator op = calculator.operatorFor(operatorName);
+        Operator op = factory.operatorFor(operatorName);
 
         values.stream().map(BigDecimal::valueOf).forEach(stack::push);
         op.execute(stack);
