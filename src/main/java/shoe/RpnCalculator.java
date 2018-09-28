@@ -1,11 +1,6 @@
 package shoe;
 
-import ch.obermuhlner.math.big.BigDecimalMath;
-
 import java.math.BigDecimal;
-import java.math.MathContext;
-
-import static java.math.MathContext.UNLIMITED;
 
 public class RpnCalculator {
     private RpnStack values;
@@ -23,62 +18,25 @@ public class RpnCalculator {
     }
 
     public void execute(String operatorName) {
+        operatorFor(operatorName).execute(values);
+    }
+
+    private Operator operatorFor(String operatorName) {
         switch (operatorName) {
             case "add":
-                add(values);
-                break;
+                return new Add();
             case "subtract":
-                subtract(values);
-                break;
+                return new Subtract();
             case "multiply":
-                multiply(values);
-                break;
+                return new Multiply();
             case "divide":
-                divide(values);
-                break;
+                return new Divide();
             case "pow":
-                pow(values);
-                break;
+                return new Pow();
             case "factorial":
-                factorial(values);
-                break;
-            default:
-                throw new IllegalArgumentException(String.format("Operator: '%s' does not exist", operatorName));
+                return new Factorial();
         }
-    }
 
-    private void add(RpnStack values) {
-        BigDecimal rhs = values.pop();
-        BigDecimal lhs = values.pop();
-        values.push(lhs.add(rhs));
-    }
-
-    private void subtract(RpnStack values) {
-        BigDecimal rhs = values.pop();
-        BigDecimal lhs = values.pop();
-        values.push(lhs.subtract(rhs));
-    }
-
-    private void pow(RpnStack values) {
-        BigDecimal rhs = values.pop();
-        BigDecimal lhs = values.pop();
-        values.push(BigDecimalMath.pow(lhs, rhs, UNLIMITED));
-    }
-
-    private void multiply(RpnStack values) {
-        BigDecimal rhs = values.pop();
-        BigDecimal lhs = values.pop();
-        values.push(lhs.multiply(rhs));
-    }
-
-    private void divide(RpnStack values) {
-        BigDecimal rhs = values.pop();
-        BigDecimal lhs = values.pop();
-        values.push(lhs.divide(rhs, UNLIMITED));
-    }
-
-    private void factorial(RpnStack values) {
-        BigDecimal value = values.pop();
-        values.push(BigDecimalMath.factorial(value, MathContext.UNLIMITED));
+        throw new IllegalArgumentException(String.format("Operator: '%s' does not exist", operatorName));
     }
 }
