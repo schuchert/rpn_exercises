@@ -6,11 +6,9 @@ import java.math.BigDecimal;
 
 import static java.math.MathContext.UNLIMITED;
 
-public class Pow implements Operator {
+public class Pow extends BinaryOperator {
     @Override
-    public void execute(RpnStack values) {
-        BigDecimal rhs = values.pop();
-        BigDecimal lhs = values.pop();
-        values.push(BigDecimalMath.pow(lhs, rhs, UNLIMITED));
+    BigDecimal calculate(BigDecimal lhs, BigDecimal rhs) {
+        return BigDecimalMath.pow(lhs, rhs, UNLIMITED);
     }
 }

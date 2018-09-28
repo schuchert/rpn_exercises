@@ -4,11 +4,9 @@ import java.math.BigDecimal;
 
 import static java.math.MathContext.UNLIMITED;
 
-public class Divide implements Operator {
+public class Divide extends BinaryOperator {
     @Override
-    public void execute(RpnStack values) {
-        BigDecimal rhs = values.pop();
-        BigDecimal lhs = values.pop();
-        values.push(lhs.divide(rhs, UNLIMITED));
+    BigDecimal calculate(BigDecimal lhs, BigDecimal rhs) {
+        return lhs.divide(rhs, UNLIMITED);
     }
 }

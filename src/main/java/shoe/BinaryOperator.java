@@ -7,7 +7,10 @@ public abstract class BinaryOperator implements Operator {
     public void execute(RpnStack values) {
         BigDecimal rhs = values.pop();
         BigDecimal lhs = values.pop();
-        values.push(calculate(lhs, rhs));
+
+        BigDecimal result = calculate(lhs, rhs);
+
+        values.push(result);
     }
 
     abstract BigDecimal calculate(BigDecimal lhs, BigDecimal rhs);

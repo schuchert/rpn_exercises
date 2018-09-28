@@ -2,11 +2,9 @@ package shoe;
 
 import java.math.BigDecimal;
 
-public class Multiply implements Operator {
+public class Multiply extends BinaryOperator {
     @Override
-    public void execute(RpnStack values) {
-        BigDecimal rhs = values.pop();
-        BigDecimal lhs = values.pop();
-        values.push(lhs.multiply(rhs));
+    BigDecimal calculate(BigDecimal lhs, BigDecimal rhs) {
+        return lhs.multiply(rhs);
     }
 }

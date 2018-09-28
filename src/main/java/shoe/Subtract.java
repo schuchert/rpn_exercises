@@ -2,11 +2,9 @@ package shoe;
 
 import java.math.BigDecimal;
 
-public class Subtract implements Operator {
+public class Subtract extends BinaryOperator {
     @Override
-    public void execute(RpnStack values) {
-        BigDecimal rhs = values.pop();
-        BigDecimal lhs = values.pop();
-        values.push(lhs.subtract(rhs));
+    BigDecimal calculate(BigDecimal lhs, BigDecimal rhs) {
+        return lhs.subtract(rhs);
     }
 }
