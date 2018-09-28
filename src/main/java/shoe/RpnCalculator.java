@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 
 public class RpnCalculator {
     private RpnStack values;
+    private final OperatorFactory factory;
 
     public RpnCalculator() {
         values = new RpnStack();
+        factory = new OperatorFactory();
     }
 
     public BigDecimal x() {
@@ -18,25 +20,7 @@ public class RpnCalculator {
     }
 
     public void execute(String operatorName) {
-        operatorFor(operatorName).execute(values);
+        factory.operatorFor(operatorName).execute(values);
     }
 
-    Operator operatorFor(String operatorName) {
-        switch (operatorName) {
-            case "add":
-                return new Add();
-            case "subtract":
-                return new Subtract();
-            case "multiply":
-                return new Multiply();
-            case "divide":
-                return new Divide();
-            case "pow":
-                return new Pow();
-            case "factorial":
-                return new Factorial();
-        }
-
-        throw new IllegalArgumentException(String.format("Operator: '%s' does not exist", operatorName));
-    }
 }

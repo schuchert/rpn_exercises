@@ -43,10 +43,4 @@ class RpnCalculatorTest {
     void divideByZeroWhenCalculatorEmpty() {
         assertThrows(ArithmeticException.class, () -> calculator.execute("divide"));
     }
-
-    @Test
-    void invalidOperatorThrowsException() {
-        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> calculator.execute("==bogus=="));
-        assertEquals("Operator: '==bogus==' does not exist", e.getMessage());
-    }
 }
