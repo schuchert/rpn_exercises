@@ -25,59 +25,59 @@ public class RpnCalculator {
     public void execute(String operatorName) {
         switch (operatorName) {
             case "add":
-                add();
+                add(values);
                 break;
             case "subtract":
-                subtract();
+                subtract(values);
                 break;
             case "multiply":
-                multiply();
+                multiply(values);
                 break;
             case "divide":
-                divide();
+                divide(values);
                 break;
             case "pow":
-                pow();
+                pow(values);
                 break;
             case "factorial":
-                factorial();
+                factorial(values);
                 break;
             default:
                 throw new IllegalArgumentException(String.format("Operator: '%s' does not exist", operatorName));
         }
     }
 
-    private void add() {
+    private void add(RpnStack values) {
         BigDecimal rhs = values.pop();
         BigDecimal lhs = values.pop();
         values.push(lhs.add(rhs));
     }
 
-    private void subtract() {
+    private void subtract(RpnStack values) {
         BigDecimal rhs = values.pop();
         BigDecimal lhs = values.pop();
         values.push(lhs.subtract(rhs));
     }
 
-    private void pow() {
+    private void pow(RpnStack values) {
         BigDecimal rhs = values.pop();
         BigDecimal lhs = values.pop();
         values.push(BigDecimalMath.pow(lhs, rhs, UNLIMITED));
     }
 
-    private void multiply() {
+    private void multiply(RpnStack values) {
         BigDecimal rhs = values.pop();
         BigDecimal lhs = values.pop();
         values.push(lhs.multiply(rhs));
     }
 
-    private void divide() {
+    private void divide(RpnStack values) {
         BigDecimal rhs = values.pop();
         BigDecimal lhs = values.pop();
         values.push(lhs.divide(rhs, UNLIMITED));
     }
 
-    private void factorial() {
+    private void factorial(RpnStack values) {
         BigDecimal value = values.pop();
         values.push(BigDecimalMath.factorial(value, MathContext.UNLIMITED));
     }
