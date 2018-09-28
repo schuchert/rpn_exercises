@@ -21,7 +21,7 @@ public class RpnCalculator {
         operatorFor(operatorName).execute(values);
     }
 
-    private Operator operatorFor(String operatorName) {
+    Operator operatorFor(String operatorName) {
         switch (operatorName) {
             case "add":
                 return new Add();
