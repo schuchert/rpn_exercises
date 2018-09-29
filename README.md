@@ -15,7 +15,7 @@ git tag -l
 ```
 
 #### Branch to an exercise
-In the repo directory, use git branch with a tag to create a brance based on one of the exercises:
+In the repo directory, use git branch with a tag to create a branch based on one of the exercises:
 ```terminal
 git checkout -b <new_branch_name> <tag_name>
 ```
@@ -28,4 +28,4 @@ git checkout -b wrap_collection_exercise wrap-collection-start
 You can now make commits to this branch as you normally would use git.
 
 ## More details
-For futher instructions, have a look at [Rpn Exercise Description](https://schuchert.github.io/wikispaces/pages/java/rpnexercises/RpnExercises.html).
+For further instructions, have a look at [Rpn Exercise Description](https://schuchert.github.io/wikispaces/pages/java/rpnexercises/RpnExercises.html).
