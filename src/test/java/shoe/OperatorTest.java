@@ -46,7 +46,8 @@ class OperatorTest {
                 Arguments.of("factorial", enter(5), expect(120)),
                 Arguments.of("pow", enter(3, 3), expect(27)),
                 Arguments.of("pow", enter(10, 0), expect(1)),
-                Arguments.of("swap", enter(2, 4), expect(4, 2))
+                Arguments.of("swap", enter(2, 4), expect(4, 2)),
+                Arguments.of("push2", enter(), expect(2))
 
         );
     }
