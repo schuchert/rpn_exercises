@@ -45,7 +45,9 @@ class OperatorTest {
                 Arguments.of("divide", enter(24, 3), expect(8)),
                 Arguments.of("factorial", enter(5), expect(120)),
                 Arguments.of("pow", enter(3, 3), expect(27)),
-                Arguments.of("pow", enter(10, 0), expect(1))
+                Arguments.of("pow", enter(10, 0), expect(1)),
+                Arguments.of("swap", enter(2, 4), expect(4, 2))
+
         );
     }
 
