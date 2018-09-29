@@ -5,6 +5,7 @@ import io.github.classgraph.ScanResult;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,5 +73,11 @@ public class OperatorFactory {
 
     public int count() {
         return operators.size();
+    }
+
+    public void newProgram(String name, String[] steps) {
+        final Program program = new Program(name);
+        Arrays.stream(steps).map(this::operatorFor).forEach(program::add);
+        operators.put(program.name, program);
     }
 }

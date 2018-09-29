@@ -23,4 +23,7 @@ public class RpnCalculator {
         factory.operatorFor(operatorName).execute(values);
     }
 
+    public void newProgram(String name, String... steps) {
+        factory.newProgram(name, steps);
+    }
 }
