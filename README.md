@@ -9,10 +9,18 @@ each of which identify a starting point.
 
 Clone this project as usual and review the branches:
 ```terminal
-git clone git clone git@github.com:schuchert/rpn_pattern_practice.git
-cd rpn_pattern_practice
+git clone git clone git@github.com:schuchert/rpn_exercises.git
+cd rpn_exercises
 git tag -l
 ```
+
+#### Confirm Your Environment
+While in the `rpn_exercsies` directory, verify your environment is working:
+```terminal
+./gradlew test # if you are using CMD, use .\gradlew.bat test
+```
+
+You should have a successful build with a number of unit tests passing.
 
 #### Branch to an exercise
 In the repo directory, use git branch with a tag to create a branch based on one of the exercises:
