@@ -9,7 +9,7 @@ each of which identify a starting point.
 
 Clone this project as usual and review the branches:
 ```terminal
-git clone git clone git@github.com:schuchert/rpn_exercises.git
+git clone https://github.com/schuchert/rpn_exercises.git
 cd rpn_exercises
 git tag -l
 ```
